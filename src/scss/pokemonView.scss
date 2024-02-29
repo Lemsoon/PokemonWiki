@@ -6,6 +6,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
+    width: 85%;
     .pokemon-container {
       border: 1px solid black;
       height: 50rem;
@@ -28,7 +29,8 @@
           font-size: 3rem;
         }
         img {
-          scale: 0.8;
+          scale: 75%;
+          margin: auto;
         }
       }
     }

@@ -5,13 +5,25 @@ import "../scss/pokemonView.scss";
 
 interface IPokemon {
   name: string;
+  species: {
+    name: string;
+  };
   sprites: any;
+  abilities: {
+    ability: {
+      name: string;
+      url: string;
+    };
+    is_hidden: boolean;
+    slot: number;
+  }[];
 }
 
 const PokemonView: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
   const [pokemonInfo, setPokemonInfo] = useState<IPokemon[]>([]);
   const [offset, setOffset] = useState<number>(0);
-  const limit = 9;
+
+  const limit = 100;
   const baseURL = "https://pokeapi.co/api/v2/";
 
   useEffect(() => {
@@ -39,8 +51,7 @@ const PokemonView: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
     setPokemonInfo((prevData) => [...prevData, ...pokemonData]);
     setOffset(offset + limit);
   };
-
-  console.log(pokemonInfo);
+  console.log("Info: ", pokemonInfo);
 
   return (
     <InfiniteScroll
@@ -53,10 +64,18 @@ const PokemonView: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
       <main className="main">
         <div>
           {pokemonInfo.map((pokemon) => (
-            <article key={pokemon.name} className="pokemon-container">
+            <article key={pokemon.species.name} className="pokemon-container">
               <div className="main-info">
-                <h1>{pokemon.name}</h1>
+                <h1>{pokemon.species.name}</h1>
                 <img src={pokemon.sprites.other.home.front_default} alt={pokemon.name} />
+              </div>
+              <div>
+                <p>Abilities:</p>
+                <ul>
+                  {pokemon.abilities.map((a, index) => (
+                    <p key={index}>{a.ability.name}</p>
+                  ))}
+                </ul>
               </div>
             </article>
           ))}
