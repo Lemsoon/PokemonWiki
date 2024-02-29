@@ -63,19 +63,21 @@ const PokemonView: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
     >
       <main className="main">
         <div>
-          {pokemonInfo.map((pokemon) => (
-            <article key={pokemon.species.name} className="pokemon-container">
+          {pokemonInfo.map((pokemon, index) => (
+            <article key={index} className="pokemon-container">
               <div className="main-info">
                 <h1>{pokemon.species.name}</h1>
                 <img src={pokemon.sprites.other.home.front_default} alt={pokemon.name} />
               </div>
-              <div>
-                <p>Abilities:</p>
-                <ul>
-                  {pokemon.abilities.map((a, index) => (
-                    <p key={index}>{a.ability.name}</p>
-                  ))}
-                </ul>
+              <div className="extra-info">
+                <div className="abilities-info">
+                  <p>Abilities:</p>
+                  <ul>
+                    {pokemon.abilities.map((a, indec) => (
+                      <p key={indec}>{a.ability.name}</p>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </article>
           ))}

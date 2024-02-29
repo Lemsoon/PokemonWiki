@@ -17,7 +17,7 @@ function App() {
     <div className="all-content">
       <Header newSearchTerm={initializeSearch} />
       <div className="main-content">
-        <Sidebar />
+        {/* <Sidebar />*/}
         <PokemonView searchTerm={searchTerm} />
       </div>
     </div>
