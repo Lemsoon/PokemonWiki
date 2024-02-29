@@ -1,0 +1,39 @@
+.main {
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    .pokemon-container {
+      border: 1px solid black;
+      height: 50rem;
+      margin-bottom: 1rem;
+      width: 30%;
+      margin: auto;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1000;
+      transition: 0.2s;
+
+      .main-info {
+        border: 1px solid red;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        h1 {
+          font-size: 3rem;
+        }
+        img {
+          scale: 0.8;
+        }
+      }
+    }
+    .pokemon-container:hover {
+      scale: 1.05;
+    }
+  }
+}
