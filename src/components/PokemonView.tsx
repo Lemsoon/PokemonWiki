@@ -17,11 +17,15 @@ interface IPokemon {
     is_hidden: boolean;
     slot: number;
   }[];
+  game_indices: {
+    game_index: string;
+  };
 }
 
 const PokemonView: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
   const [pokemonInfo, setPokemonInfo] = useState<IPokemon[]>([]);
   const [offset, setOffset] = useState<number>(0);
+  const [evoChain, setEvoChain] = useState("");
 
   const limit = 9;
   const baseURL = "https://pokeapi.co/api/v2/";
@@ -29,12 +33,16 @@ const PokemonView: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
   useEffect(() => {
     const fetchPokemonData = async () => {
       const pokeURLResponse = await axios.get(`${baseURL}pokemon?limit=${limit}&offset=${offset}`);
-      const pokeURLs: string[] = pokeURLResponse.data.results.map((result: any) => result.url);
+      console.log(pokeURLResponse);
+      const pokeURLs: string[] = pokeURLResponse.data.results.map((result: string) => result.url);
 
       const pokemonRequests = pokeURLs.map((url: string) => axios.get(url));
       const pokemonDataResponses = await Promise.all(pokemonRequests);
       const pokemonData = pokemonDataResponses.map((response) => response.data);
+      //const evoChainURL = speciesData.evolution_chain.url;
+      //console.log(evoChainURL);
 
+      console.log(pokemonData);
       setPokemonInfo(pokemonData);
       setOffset(offset + limit);
     };
@@ -79,7 +87,8 @@ const PokemonView: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
                   </ul>
                 </div>
                 <div className="other-info">
-                  <p>Other</p>
+                  <p>Evolution chain</p>
+                  <ul></ul>
                 </div>
               </div>
             </article>
