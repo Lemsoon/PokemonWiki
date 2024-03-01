@@ -23,7 +23,7 @@ const PokemonView: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
   const [pokemonInfo, setPokemonInfo] = useState<IPokemon[]>([]);
   const [offset, setOffset] = useState<number>(0);
 
-  const limit = 100;
+  const limit = 9;
   const baseURL = "https://pokeapi.co/api/v2/";
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const PokemonView: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
       <main className="main">
         <div>
           {pokemonInfo.map((pokemon, index) => (
-            <article key={index} className="pokemon-container">
+            <article key={index} className="pokemon-container" onClick={(e) => console.log(e.target)}>
               <div className="main-info">
                 <h1>{pokemon.species.name}</h1>
                 <img src={pokemon.sprites.other.home.front_default} alt={pokemon.name} />
@@ -77,6 +77,9 @@ const PokemonView: React.FC<{ searchTerm: string }> = ({ searchTerm }) => {
                       <p key={indec}>{a.ability.name}</p>
                     ))}
                   </ul>
+                </div>
+                <div className="other-info">
+                  <p>Other</p>
                 </div>
               </div>
             </article>
